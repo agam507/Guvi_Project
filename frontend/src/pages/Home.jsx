@@ -11,14 +11,19 @@ export default function Home() {
           {/* Card Header */}
           <div className="bg-[#1790db] p-8 pb-20 relative rounded-t-2xl">
             <div className="absolute top-8 right-8 flex gap-3">
-              <button className="bg-[#0e5ba8] text-white font-semibold px-5 py-2 rounded-full shadow transition">
+              {/* <button className="bg-[#0e5ba8] text-white font-semibold px-5 py-2 rounded-full shadow transition">
                 Student View
-              </button>
+              </button> */}
               <Link to="/admin">
                 <button className="bg-blue-200 text-[#0e5ba8] font-semibold px-5 py-2 rounded-full shadow transition hover:bg-blue-300">
                   Admin Dashboard
                 </button>
               </Link>
+            </div>
+            <div className="absolute bottom-20 right-8 flex gap-3">
+                <button className="bg-[#0e5ba8] text-white font-semibold px-5 py-2 rounded-full shadow transition">
+                  Student View
+                </button>
             </div>
             <h1 className="text-3xl sm:text-4xl font-bold text-white leading-tight mt-4 text-left ">
               Feedback<br />System

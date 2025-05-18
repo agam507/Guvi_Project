@@ -23,7 +23,7 @@ export default function FeedbackForm({ onSubmit }) {
   return (
     <form className="space-y-5" onSubmit={handleSubmit}>
       <div>
-        <label className="block font-semibold text-[#1790db] mb-1">
+        <label className="block font-semibold text-[#1790db] mb-1 text-left">
           Your Name:
         </label>
         <input
@@ -35,7 +35,7 @@ export default function FeedbackForm({ onSubmit }) {
         />
       </div>
       <div>
-        <label className="block font-semibold text-[#1790db] mb-1">
+        <label className="block font-semibold text-[#1790db] mb-1 text-left">
           Feedback Type:
         </label>
         <select
@@ -48,7 +48,7 @@ export default function FeedbackForm({ onSubmit }) {
         </select>
       </div>
       <div>
-        <label className="block font-semibold text-[#1790db] mb-1">
+        <label className="block font-semibold text-[#1790db] mb-1 text-left">
           Title:
         </label>
         <input
@@ -60,7 +60,7 @@ export default function FeedbackForm({ onSubmit }) {
         />
       </div>
       <div>
-        <label className="block font-semibold text-[#1790db] mb-1">
+        <label className="block font-semibold text-[#1790db] mb-1 text-left">
           Feedback:
         </label>
         <textarea
