@@ -1,37 +1,23 @@
-from fastapi import FastAPI
-from .routes.api import router
-from .middleware.logging import LoggingMiddleware
-from fastapi.middleware.cors import CORSMiddleware
-import os
-from dotenv import load_dotenv
+from fastapi import FastAPI, Depends
+from . import crud, models, schemas
+from .database import SessionLocal, engine
+from sqlalchemy.orm import Session
 
-# Load environment variables
-load_dotenv()
+models.Base.metadata.create_all(bind=engine)
 
-app = FastAPI(
-    title=os.getenv("APP_NAME", "FastAPI Backend"),
-    version=os.getenv("API_VERSION", "v1")
-)
+app = FastAPI()
 
-# Add CORS middleware
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # Allows all origins
-    allow_credentials=True,
-    allow_methods=["*"],  # Allows all methods
-    allow_headers=["*"],  # Allows all headers
-)
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
-# Add logging middleware
-app.add_middleware(LoggingMiddleware)
+@app.post("/feedback")
+def submit_feedback(feedback: schemas.FeedbackCreate, db: Session = Depends(get_db)):
+    return crud.create_feedback(db, feedback)
 
-# Include routes
-app.include_router(router, prefix="/api")
-
-@app.get("/")
-def read_root():
-    return {
-        "message": "Hello World from FastAPI!",
-        "app_name": os.getenv("APP_NAME", "FastAPI Backend"),
-        "version": os.getenv("API_VERSION", "v1")
-    } 
+@app.get("/admin")
+def view_feedbacks(db: Session = Depends(get_db)):
+    return crud.get_feedbacks(db)
